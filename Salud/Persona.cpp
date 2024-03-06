@@ -62,11 +62,22 @@ Persona(){
 int main(){
 
     Persona carlitos;
+    int eleccion;
 
-    carlitos.pedirDatos();
-    carlitos.mostrarPersona();
-    carlitos.calcularImc();
+    cout<<"Sistema de peso ideal.\nElige que necesitas hacer: \n(1) Para pedir datos de la persona.\n(2) Para mostrar los datos pedidos de la persona.\n(3) Calcular si el peso es ideal."<<endl;
+    cin>>eleccion;
 
-
+    switch(eleccion){
+        case 1:{
+            carlitos.pedirDatos();
+        }
+        case 2:{
+            carlitos.mostrarPersona();
+        }
+        case 3:{
+            carlitos.calcularImc();
+        }
+    }
+    
     return 0;
 }
