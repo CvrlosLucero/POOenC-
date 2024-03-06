@@ -16,7 +16,7 @@ Persona(){
 
     public:
         void pedirDatos(){
-            cout<<"Ingrese el tipo de documento de la persona: "<<endl;
+            cout<<"Ingrese el tipo de documento de la persona(C.C/T.I): "<<endl;
             cin>>tipoDoc;
             cout<<"Ingrese el N° de Documento: "<<endl;
             cin>>documento;
