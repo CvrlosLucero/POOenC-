@@ -1,83 +1,128 @@
 #include <iostream>
 #include <string>
-#include <math.h>
+#include <cmath>
 
 using namespace std;
 
-class Persona{
+class Persona {
+private:
+    string tipoDoc, documento, nombre, apellido, sexo;
+    double peso, estatura, edad;
 
-    public:
-        string tipoDoc, documento, nombre, apellido, sexo;
-        double peso, estatura, edad;
+public:
+    Persona() {}
 
-Persona(){
+    void setTipoDoc(string tipo) {
+        tipoDoc = tipo;
+    }
 
-};
+    string getTipoDoc() const {
+        return tipoDoc;
+    }
 
-    public:
-        void pedirDatos(){
-            cout<<"Ingrese el tipo de documento de la persona(C.C/T.I): "<<endl;
-            cin>>tipoDoc;
-            cout<<"Ingrese el N° de Documento: "<<endl;
-            cin>>documento;
-            cout<<"Ingrese el nombre de la persona: "<<endl;
-            cin>>nombre;
-            cout<<"Ingrese el apellido de la persona: "<<endl;
-            cin>>apellido;
-            cout<<"Ingrese el sexo de la persona (Masculino/Femenino): "<<endl;
-            cin>>sexo;
-            cout<<"Ingrese el peso de la persona (en Kg): "<<endl;
-            cin>>peso;
-            cout<<"Ingrese la estatura de la persona (en m)"<<endl;
-            cin>>estatura;
-            cout<<"Ingrese la edad de la persona: "<<endl;
-            cin>>edad;
-        }
-        void mostrarPersona(){
-            cout<<"Tipo de documento: "<<tipoDoc<<"\n"<<"N° de Documento: "<<documento<<"\n"<<"Nombre: "<<nombre<<"\n"<<"Apellido: "<<apellido<<"\n"<<"Sexo: "<<sexo<<"\n"<<"Peso: "<<peso<<"\n"<<"Estatura: "<<estatura<<"\n"<<"Edad: "<<edad<<endl;
-        }
+    void setDocumento(string doc) {
+        documento = doc;
+    }
 
-        void calcularImc(){
-            double pesoActual = peso/pow(estatura,2);
+    string getDocumento() const {
+        return documento;
+    }
 
-            if(pesoActual<20){
-                cout<<"El peso está por debajo de lo ideal."<<endl;
-            }else if(pesoActual>=20 && pesoActual<=25){
-                cout<<"El peso es ideal."<<endl;
-            }else if(pesoActual>25){
-                cout<<"Tiene sobrepeso."<<endl;
-            }
-        }
-        void mayorEdad(){
-            if(edad>18){
-                cout<<"Es mayor de edad."<<endl;
-            }else{
-                cout<<"Es menor de edad."<<endl;
-            }
+    void setNombre(string nom) {
+        nombre = nom;
+    }
 
-        }
+    string getNombre() const {
+        return nombre;
+    }
 
-};
+    void setApellido(string ape) {
+        apellido = ape;
+    }
 
-int main(){
+    string getApellido() const {
+        return apellido;
+    }
 
-    Persona carlitos;
-    int eleccion;
+    void setSexo(string sex) {
+        sexo = sex;
+    }
 
-    cout<<"Sistema de peso ideal.\nElige que necesitas hacer: \n(1) Para pedir datos de la persona.\n(2) Para mostrar los datos pedidos de la persona.\n(3) Calcular si el peso es ideal."<<endl;
-    cin>>eleccion;
+    string getSexo() const {
+        return sexo;
+    }
 
-    switch(eleccion){
-        case 1:{
-            carlitos.pedirDatos();
-        }
-        case 2:{
-            carlitos.mostrarPersona();
-        }
-        case 3:{
-            carlitos.calcularImc();
+    void setPeso(double p) {
+        peso = p;
+    }
+
+    double getPeso() const {
+        return peso;
+    }
+
+    void setEstatura(double e) {
+        estatura = e;
+    }
+
+    double getEstatura() const {
+        return estatura;
+    }
+
+    void setEdad(double ed) {
+        edad = ed;
+    }
+
+    double getEdad() const {
+        return edad;
+    }
+
+    void pedirDatos() {
+        cout << "Ingrese el tipo de documento de la persona(C.C/T.I): " << endl;
+        cin >> tipoDoc;
+        cout << "Ingrese el N° de Documento: " << endl;
+        cin >> documento;
+        cout << "Ingrese el nombre de la persona: " << endl;
+        cin >> nombre;
+        cout << "Ingrese el apellido de la persona: " << endl;
+        cin >> apellido;
+        cout << "Ingrese el sexo de la persona (Masculino/Femenino): " << endl;
+        cin >> sexo;
+        cout << "Ingrese el peso de la persona (en Kg): " << endl;
+        cin >> peso;
+        cout << "Ingrese la estatura de la persona (en m)" << endl;
+        cin >> estatura;
+        cout << "Ingrese la edad de la persona: " << endl;
+        cin >> edad;
+    }
+
+    void mostrarPersona() {
+        cout << "Tipo de documento: " << tipoDoc << "\n"
+             << "N° de Documento: " << documento << "\n"
+             << "Nombre: " << nombre << "\n"
+             << "Apellido: " << apellido << "\n"
+             << "Sexo: " << sexo << "\n"
+             << "Peso: " << peso << "\n"
+             << "Estatura: " << estatura << "\n"
+             << "Edad: " << edad << endl;
+    }
+
+    string calcularImc() {
+        double pesoActual = peso / pow(estatura, 2);
+
+        if (pesoActual < 20) {
+            return "PESOBAJO";
+        } else if (pesoActual >= 20 && pesoActual <= 25) {
+            return "PESOIDEAL";
+        } else if (pesoActual > 25) {
+            return "SOBREPESO";
         }
     }
-    
-    return 0;
-}
+
+    void mayorEdad() {
+        if (edad > 18) {
+            cout << "Es mayor de edad." << endl;
+        } else {
+            cout << "Es menor de edad." << endl;
+        }
+    }
+};
