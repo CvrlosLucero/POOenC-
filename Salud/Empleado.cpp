@@ -77,7 +77,7 @@ class Empleado:public Persona
 int main(){
     Empleado juanita;
     juanita.pedirDatos();
-    juanita.mayorEdad();
+    juanita.mayorEdad(juanita.getFechaNacimiento());
     juanita.calcularHonorarios();
 
     return 0;

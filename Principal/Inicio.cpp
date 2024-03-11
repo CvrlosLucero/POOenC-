@@ -1,6 +1,7 @@
 #include <iostream>
 #include <math.h>
 #include "../Salud/Persona.cpp"
+#include "../Salud/Empleado.cpp"
 
 using namespace std;
 
@@ -13,10 +14,11 @@ class Inicio{
 int main(){
 
     Persona carlitos;
+    Empleado juanita;
     int eleccion;
     bool bucle = true;
 
-        while(bucle=true){
+        while(bucle){
             cout<<"Sistema de peso ideal.\nElige que necesitas hacer: \n(1) Para pedir datos de la persona.\n(2) Para mostrar los datos pedidos de la persona.\n(3) Calcular si el peso es ideal.\n(4) Mostrar si la persona es mayor de edad."<<endl;
                 cin>>eleccion;
 
