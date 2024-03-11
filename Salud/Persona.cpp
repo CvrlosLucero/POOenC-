@@ -106,16 +106,9 @@ public:
              << "Edad: " << edad << endl;
     }
 
-    string calcularImc() {
+    double calcularImc() {
         double pesoActual = peso / pow(estatura, 2);
-
-        if (pesoActual < 20) {
-            return "PESOBAJO";
-        } else if (pesoActual >= 20 && pesoActual <= 25) {
-            return "PESOIDEAL";
-        } else if (pesoActual > 25) {
-            return "SOBREPESO";
-        }
+            return pesoActual;
     }
 
     void mayorEdad() {

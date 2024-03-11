@@ -29,7 +29,7 @@ int main(){
                 }
                 case 3:{
                     carlitos.calcularImc();
-        
+                    
                     if(carlitos.calcularImc()=="PESOBAJO"){
                         cout<<"El peso está por debajo de lo ideal."<<endl;
                     }else if(carlitos.calcularImc()=="PESOIDEAL"){
