@@ -9,7 +9,7 @@ class Empleado:public Persona
 
     private:
         string cargo, departamento;
-        int valorHora, horasTrabajadas;
+        int valorHora, horasTrabajadas, fechaNacimiento;
     public:
 
         void setCargo(string carge){
@@ -36,12 +36,49 @@ class Empleado:public Persona
         int getHorasTrabajadas(){
             return horasTrabajadas;
         }
+        void setFechaNacimiento(int birth){
+            fechaNacimiento=birth;
+        }
+        int getFechaNacimiento(){
+            return fechaNacimiento;
+        }
+        void calcularHonorarios(){
+            double reteica=(valorHora*horasTrabajadas*0.00966);
+            double honorarios = (valorHora*horasTrabajadas)- reteica;
+        }
+        void pedirDatos(){
+            Persona::pedirDatos();
+            cout<<"Ingrese el cargo en el que el empleado está: "<<endl;
+            cin>>cargo;
+            cout<<"Ingrese el departamento en el que el empleado está: "<<endl;
+            cin>>departamento;
+            cout<<"Ingrese el valor de la hora del empleado: "<<endl;
+            cin>>valorHora;
+            cout<<"Ingrese las horas trabajadas del empleado: "<<endl;
+            cin>>horasTrabajadas;
+            cout<<"Ingrese el año de nacimiento: "<<endl;
+            cin>>fechaNacimiento;
 
+        }
+        string mayorEdad(int fechaNacimiento){
+            
+            this->fechaNacimiento=fechaNacimiento;
 
+            int edad=2024-fechaNacimiento;
+
+            if(edad<18){
+                return "Es menor de edad.";
+            }else{
+                return "Es mayor de edad.";
+            }
+        }
 };
 
 int main(){
     Empleado juanita;
     juanita.pedirDatos();
-    cout<<juanita.getApellido();
+    juanita.mayorEdad();
+    juanita.calcularHonorarios();
+
+    return 0;
 }
