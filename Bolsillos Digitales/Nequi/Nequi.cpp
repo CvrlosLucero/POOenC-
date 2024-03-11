@@ -101,6 +101,7 @@ class Nequi{
                 cin>>mesMeta;
             cout<<"Ingresa la cantidad para ahorrar: "<<endl;
                 cin>>ahorro;
+                //crear funcionalidad
         }
 
         void bolsillos(){
@@ -108,11 +109,31 @@ class Nequi{
         }
 
         void sacarPlata(){
-
+            cout<<"Saca tu plata de Nequi:"<<endl;
+            cout<<"Opciones para sacar:\n(1) Por cajero\n(2) Por Punto Físico"<<endl;
+            cin<<eleccion2;
+            //crear funcionalidad
+            switch(eleccion2){
+                case 1:{}
+                case 2:{}
+                default:{}
+            }
         }
 
         void movimientos(){
-
+            int eleccion3;
+            cout<<"Movimientos de Nequi:"<<endl;
+            cout<<"¿Como quiere ver sus movimientos?\n(1) Para últimos 10.\n(2) Solo recarga.\n(3) Solo colchon.\n(4) Solo Meta.\n(4) Solo Bolsillos.\n(5) Solo retiros.\n(6) Todos sus movimientos."<<endl;
+            //crear funcionalidad
+            switch(eleccion3){
+                case 1:{}
+                case 2:{}
+                case 3:{}
+                case 4:{}
+                case 5:{}
+                case 6:{}
+                default:{}
+            }
         }
 
 
