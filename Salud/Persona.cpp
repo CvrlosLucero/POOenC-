@@ -106,7 +106,7 @@ public:
              << "Edad: " << edad << endl;
     }
 
-    double calcularImc() {
+    double calcularImc(){
         double pesoActual = peso / pow(estatura, 2);
             return pesoActual;
     }
