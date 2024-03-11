@@ -23,23 +23,27 @@ int main(){
             switch(eleccion){
                 case 1:{
                     carlitos.pedirDatos();
+                    break;
                 }
                 case 2:{
                     carlitos.mostrarPersona();
+                    break;
                 }
                 case 3:{
-                    carlitos.calcularImc();
-                    
-                    if(carlitos.calcularImc()=="PESOBAJO"){
+                    double imc=carlitos.calcularImc();
+                    cout<<"entro al 3"<<endl;
+                    if(imc<20){
                         cout<<"El peso está por debajo de lo ideal."<<endl;
-                    }else if(carlitos.calcularImc()=="PESOIDEAL"){
+                    }else if(imc<=20 && imc>=25){
                         cout<<"El peso es ideal."<<endl;
-                    }else if(carlitos.calcularImc()=="SOBREPESO"){
+                    }else if(imc>25){
                         cout<<"Tiene sobrepeso."<<endl;
                     }
+                    break;
                 }
                 case 4:{
                     carlitos.mayorEdad();
+                    break;
                 }
                 default:{
                     cout<<"Elección incorrecta."<<endl;
