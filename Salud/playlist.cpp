@@ -5,10 +5,17 @@
 using namespace std;
 
 class SpotifyJam {
+    
+    list<string> listaGeneral;
     list<string> lista1;
     list<string> lista2;
 
 public:
+
+    void addListaGeneral(string song) {
+        listaGeneral.push_back(song);
+    }
+
     void addLista1(string song) {
         lista1.push_back(song);
     }
@@ -23,6 +30,12 @@ public:
 
     void removeLista2(string song) {
         lista2.remove(song);
+    }
+
+    void displayListaGeneral() {
+        for (string song : listaGeneral) {
+            cout << song << endl;
+        }
     }
 
     void displayLista1() {
@@ -55,33 +68,49 @@ int main() {
     bool continuar = true;
 
     while(continuar==true){
-        cout<<"Bienvenido a Spotify Jam, ¿Qué deseas hacer?.\n(1) Para agregar canciones a la Lista 1.\n(2) Para agregar canciones a la Lista 2.\n(3) Mostrar el contenido de las 2 playlists.\n(4) Mostrar el Jam de Spotify.\n(5) Eliminar contenido de las listas."<<endl;
+        cout<<"Bienvenido a Spotify Jam, ¿Qué deseas hacer?.\n(1) Para agregar canciones a la Lista General\n(2) Para agregar canciones a la Lista 1.\n(3) Para agregar canciones a la Lista 2.\n(4) Mostrar el contenido de las 2 playlists.\n(5) Mostrar el Jam de Spotify.\n(6) Eliminar contenido de las listas."<<endl;
         cin>>eleccion;
 
         switch(eleccion){
             case 1:
-                cout<<"Agrega canciones a la lista 1 (ingresa 'X' para dejar de agregar): "<<endl;
+                cout<<"Agrega canciones a la Lista General (ingresa 'X' para dejar de agregar): "<<endl;
                 while(cin >> song1 && song1 != "X") {
-                    spotifyJam.addLista1(song1);
+                    spotifyJam.addListaGeneral(song1);
                 }
                 break;
             case 2:
-                cout<<"Agrega canciones a la lista 2 (ingresa 'X' para dejar de agregar): "<<endl;
-                while(cin >> song2 && song2 != "X") {
-                    spotifyJam.addLista2(song2);
+            SpotifyJam.displayListaGeneral();
+            cout<<"Agrega canciones a la lista 1 de la Lista General (ingresa 'X' para dejar de agregar): "<<endl;
+            while (cin >> song1 && song1 != "X") {
+                if (find(spotifyJam.listaGeneral.begin(), spotifyJam.listaGeneral.end(), song1) != spotifyJam.listaGeneral.end()) {
+                    spotifyJam.addLista1(song1);
+                } else{
+                    cout<<"La canción no está en la lista general. No se puede agregar a la lista 1."<<endl;
                 }
-                break;
+            }
+            break;
             case 3:
+                SpotifyJam.displayListaGeneral();
+                cout<<"Agrega canciones a la lista 2 de la Lista General (ingresa 'X' para dejar de agregar): "<<endl;
+                while (cin>>song2 && song2 != "X") {
+                    if (find(spotifyJam.listaGeneral.begin(), spotifyJam.listaGeneral.end(), song2) != spotifyJam.listaGeneral.end()) {
+                        spotifyJam.addLista2(song2);
+                    }else{
+                        cout<<"La canción no está en la lista general. No se puede agregar a la lista 2."<<endl;
+                    }
+            }
+            break;
+            case 4:
                 cout << "Playlist 1:" << endl;
                 spotifyJam.displayLista1();
                 cout << "Playlist 2:" << endl;
                 spotifyJam.displayLista2();
                 break;
-            case 4:
+            case 5:
                 cout << "Jam:" << endl;
                 spotifyJam.displayJam();
                 break;
-            case 5:
+            case 6:
                 cout<<"¿De que lista deseas eliminar canciones?\n(1) Para eliminar canciones de la lista 1.\n(2) Para eliminar canciones de la lista 2."<<endl;
                 cin>>eleccion1;
                 if(eleccion1==1){
