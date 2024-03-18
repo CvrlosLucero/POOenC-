@@ -151,3 +151,4 @@ int main() {
     }
     return 0;
 }
+//ordenar las los elementos de las listas por nombre (A-Z), por artista (Z-A) y por duración (1-3 minutos).
