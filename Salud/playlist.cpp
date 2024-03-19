@@ -5,14 +5,21 @@
 
 using namespace std;
 
-class SpotifyJam {
+struct Node {
+    string data;
+    Node* next;
+};
 
+class SpotifyJam {
+    Node* jam;
 public:
     list<string> listaGeneral;
     list<string> lista1;
     list<string> lista2;
 
 public:
+
+    SpotifyJam() : jam(nullptr) {}
 
     void addListaGeneral(string song) {
         listaGeneral.push_back(song);
@@ -56,13 +63,33 @@ public:
         }
     }
 
-    void displayJam(){
+    void createJam() {
+        Node* tail = nullptr;
         for (string song : lista1) {
-            cout << song << endl;
+            Node* newNode = new Node{song, nullptr};
+            if (jam == nullptr) {
+                jam = newNode;
+            } else {
+                tail->next = newNode;
+            }
+            tail = newNode;
         }
-
         for (string song : lista2) {
-        cout << song << endl;
+            Node* newNode = new Node{song, nullptr};
+            if (jam == nullptr) {
+                jam = newNode;
+            } else {
+                tail->next = newNode;
+            }
+            tail = newNode;
+        }
+    }
+
+    void displayJam() {
+        Node* temp = jam;
+        while (temp != nullptr) {
+            cout << temp->data << endl;
+            temp = temp->next;
         }
     }
 };
@@ -120,6 +147,7 @@ int main() {
                 break;
             case 5:
                 cout << "Jam:" << endl;
+                spotifyJam.createJam();
                 spotifyJam.displayJam();
                 break;
             case 6:
