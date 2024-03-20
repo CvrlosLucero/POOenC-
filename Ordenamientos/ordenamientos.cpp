@@ -4,9 +4,9 @@
 #include <algorithm>
 
 using namespace std;
-
-//ordenamiento de listas
-
+//ahora necesito ordenar por pintas
+//ordenamiento de listas letras
+//para numeros, cambiar a int data y val
 struct Node{
     string data;
     Node* next;
@@ -55,14 +55,20 @@ void ordenarLista(Node* &head){
 
 int main(){
     Node* head=nullptr;
+    addInicio(head,"8");
+    addInicio(head,"10");
+    addInicio(head,"9");
+    addInicio(head,"4");
+    addInicio(head,"5");
+    addInicio(head,"2");
+    addInicio(head,"3");
+    addInicio(head,"7");
+    addInicio(head,"6");
     addInicio(head,"A");
-    addInicio(head,"C");
-    addInicio(head,"S");
-    addInicio(head,"G");
+    addInicio(head,"K");
+    addInicio(head,"Q");
     addInicio(head,"J");
-    addInicio(head,"T");
-    addInicio(head,"L");
-    addInicio(head,"O");
+
 
     cout<<"La lista original es: "<<endl;
     imprimirLista(head);
