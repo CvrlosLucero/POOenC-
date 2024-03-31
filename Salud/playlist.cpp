@@ -13,7 +13,7 @@ class Song {
     public:
         Song(const string& nombre = "", const string& artista = "", int duracion = 0)
         : nombre(nombre), artista(artista), duracion(duracion) {}
-        
+
         friend istream& operator>>(istream& is, Song& song) {
             cout<<"Nombre: ";
                 is>>song.nombre;
@@ -143,16 +143,48 @@ public:
             temp = temp->getNext();
         }
     }
+
+    void ordenarJamAZ(){
+        Node* current = jam;
+        while (current != nullptr) {
+            Node* index = current->getNext();
+            while (index != nullptr) {
+                if (current->getSong().nombre > index->getSong().nombre) {
+                    Song temp = current->getSong();
+                    current->setSong(index->getSong());
+                    index->setSong(temp);
+                }
+            index = index->getNext();
+            }   
+        current = current->getNext();
+        }
+    }
+
+    void ordenarJamArtistaZA(){
+        Node* current = jam;
+        while (current != nullptr) {
+            Node* index = current->getNext();
+            while (index != nullptr) {
+                if (current->getSong().artista < index->getSong().artista) {
+                    Song temp = current->getSong();
+                    current->setSong(index->getSong());
+                    index->setSong(temp);
+                }
+                index = index->getNext();
+            }
+        current = current->getNext();
+        }
+    }
 };
 
 int main() {
     SpotifyJam spotifyJam;
     Song song1, song2, song3;
-    int eleccion, eleccion1;
+    int eleccion, eleccion1, eleccion2;
     bool continuar = true;
 
     while(continuar){
-        cout<<"Bienvenido a Spotify Jam, ¿Qué deseas hacer?.\n(1) Para agregar canciones a la Lista General\n(2) Para agregar canciones a la Lista 1.\n(3) Para agregar canciones a la Lista 2.\n(4) Mostrar el contenido de las listas.\n(5) Mostrar el Jam de Spotify.\n(6) Eliminar contenido de las listas."<<endl;
+        cout<<"Bienvenido a Spotify Jam, ¿Qué deseas hacer?.\n(1) Para agregar canciones a la Lista General\n(2) Para agregar canciones a la Lista 1.\n(3) Para agregar canciones a la Lista 2.\n(4) Mostrar el contenido de las listas.\n(5) Mostrar el Jam de Spotify.\n(6) Eliminar contenido de las listas.\n(7) Ordenamientos de Jam."<<endl;
         cin>>eleccion;
 
         switch(eleccion){
@@ -223,6 +255,25 @@ int main() {
                     spotifyJam.removeLista2(song3);
                 }
                 break;
+            case 7:
+                cout<<"Ordenamientos de las canciones en el Jam de Spotify.\n(1) Ordenar por nombre (A-Z).\n(2) Ordenar por artista (Z-A).\n(3) Ordenar por duración (1-3 minutos).\n(4) Canciones por la letra 'a'.\n(5) Canciones que pertenecen a un mismo artista.\n(6) Todas las canciones que duren más de 3 minutos."<<endl;
+                cin>>eleccion2;
+                switch(eleccion2){
+                    case 1:{
+                        spotifyJam.ordenarJamAZ();
+                        cout<<"Se ha ordenado el Jam de Spotify por nombre (A-Z)."<<endl;
+                        break;
+                    }
+                    case 2:{
+                        spotifyJam.ordenarJamArtistaZA();
+                        cout<<"Se ha ordenado el Jam de Spotify por artista (Z-A)."<<endl;
+                        break;
+                    }
+                    default:{
+                        cout<<"Opción no válida."<<endl;
+                        break;
+                    }
+                }
             default:
                 cout<<"Opción no válida."<<endl;
                 break;
@@ -230,4 +281,5 @@ int main() {
     }
     return 0;
 }
-//ordenar las los elementos de las listas por nombre (A-Z), por artista (Z-A) y por duración (1-3 minutos).
+//ordenar las los elementos de las listas por nombre (A-Z), por artista (Z-A) y por duración (1-3 minutos), buscar canciones por a, 
+//enlistar canciones que pertenecen a un mismo artista, y todas las canciones que duren mas de 3 minutos.
