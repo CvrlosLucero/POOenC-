@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
-#include <cmath>
+#include <ctime>
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <list>
 
 
 using namespace std;
@@ -140,8 +141,15 @@ class Meta {
 
 class Nequi{
     public:
-        //Lista de usuarios
+
+        //Lista de usuarios y movimientos
         vector<Usuario> usuarios;
+        list<string> movimientosLista;
+        list<string> recargasLista;
+        list<string> ColchonLista;
+        list<string> metasLista;
+        list<string> bolsillosLista;
+        list<string> retirosLista;
 
         // Constructor que inicializa la lista de usuarios
         Nequi(){
@@ -217,6 +225,7 @@ class Nequi{
                                 cin>>monto;
                             //Agregar monto a saldo
                             u.agregarSaldo(monto);
+                            recargasLista.push_back("Recarga de " + std::to_string(monto));
                             break;
                         }
                         case 2:{
@@ -224,6 +233,7 @@ class Nequi{
                                 cin>>monto;
                             //Agregar monto a saldo
                             u.agregarSaldo(monto);
+                            recargasLista.push_back("Recarga de " + std::to_string(monto));
                             break;
                         }
                         case 3:{
@@ -231,6 +241,7 @@ class Nequi{
                                 cin>>monto;
                             //Agregar monto a saldo
                             u.agregarSaldo(monto);
+                            recargasLista.push_back("Recarga de " + std::to_string(monto));
                             break;
                         }
                         case 4:{
@@ -238,6 +249,7 @@ class Nequi{
                                 cin>>monto;
                             //Agregar monto a saldo
                             u.agregarSaldo(monto);
+                            recargasLista.push_back("Recarga de " + std::to_string(monto));
                             break;
                         }
                         case 5:{
@@ -245,6 +257,7 @@ class Nequi{
                                 cin>>monto;
                             //Agregar monto a saldo
                             u.agregarSaldo(monto);
+                            recargasLista.push_back("Recarga de " + std::to_string(monto));
                         }
                         default:{
                             cout<<"Opción no válida."<<endl;
@@ -272,6 +285,7 @@ class Nequi{
 
                     // Agregar el saldo aleatorio al saldo del usuario
                     u.agregarSaldo(saldoAleatorio);
+                    recargasLista.push_back("Recarga de " + std::to_string(monto));
 
                     cout<<"Se ha generado el código "<< codigo<<" con un saldo de "<<saldoAleatorio<<endl;
                     break;
@@ -306,8 +320,9 @@ class Nequi{
                 }
             }
 
-            // Crear la meta
+            // Crear la meta y se añade a la lista para movimientos
             Meta meta(nombreMeta, diaMeta, mesMeta, anoMeta);
+            metasLista.push_back("Meta: " + nombreMeta + ", Fecha objetivo: " + std::to_string(diaMeta) + "/" + std::to_string(mesMeta) + "/" + std::to_string(anoMeta));
 
             // Si se debe descontar del saldo disponible
             if (descuentoDisponible) {
@@ -317,19 +332,19 @@ class Nequi{
                 // Determinar la frecuencia de descuento
                 switch (frecuenciaDescuento) {
                     case 1:
-                        cout << "Se descontará del saldo diariamente." << endl;
+                        cout<<"Se descontará del saldo diariamente."<<endl;
                         break;
                     case 2:
-                        cout << "Se descontará del saldo semanalmente el día " << diaDescuento << " de la semana." << endl;
+                        cout<<"Se descontará del saldo semanalmente el día "<<diaDescuento<<" de la semana."<<endl;
                         break;
                     case 3:
-                        cout << "Se descontará del saldo cada quince días los días " << diaDescuento << " y " << (diaDescuento + 15) % 31 << " del mes." << endl;
+                        cout<<"Se descontará del saldo cada quince días los días "<<diaDescuento<<" y "<<(diaDescuento + 15) % 31<<" del mes."<<endl;
                         break;
                     case 4: 
-                        cout << "Se descontará del saldo mensualmente el día " << diaDescuento << " del mes." << endl;
+                        cout<<"Se descontará del saldo mensualmente el día "<<diaDescuento<<" del mes."<<endl;
                         break;
                     default:
-                        cout << "Frecuencia de descuento no válida." << endl;
+                        cout<<"Frecuencia de descuento no válida."<<endl;
                         break;
                 }
             }
@@ -352,6 +367,7 @@ class Nequi{
                         cin>>monto;
                         u.retirarSaldo(monto);
                         bolsilloSaldo += monto;
+                        bolsillosLista.push_back("Bolsillo: " + nombreBolsillo + ", Saldo: " + std::to_string(bolsilloSaldo));
                     break;
                 }
                 case 2:{
@@ -362,6 +378,7 @@ class Nequi{
                         if (monto <= bolsilloSaldo) {
                             u.agregarSaldo(monto);
                             bolsilloSaldo -= monto;
+                            bolsillosLista.push_back("Retiro de bolsillo: " + nombreBolsillo + ", Monto: " + std::to_string(monto));
                         } else {
                             cout<<"La cantidad ingresada es mayor al saldo disponible en el bolsillo."<<endl;
                         }
@@ -372,7 +389,94 @@ class Nequi{
                     break;
                 }
             }
+        }
 
+        void sacarPlata(){
+            int eleccion;
+            int codigo = rand() % 900000 + 100000;
+            srand(time(0));
+            cout<<"¿Cómo desea retirar el dinero?\n(1) Por Punto Nequi o corresponsal.\n(2) Por código de cajero."<<endl;
+                cin>>eleccion;
+
+            switch (eleccion){
+                case 1:{
+                    cout<<"Ve a un Punto Nequi o Corresponsal Bancolombia con este código."<<endl;
+                    cout<<codigo<<endl;
+                    retirosLista.push_back("Retiro en Punto Nequi o Corresponsal Bancolombia con el código: " + std::to_string(codigo));
+                    break;
+                }
+                case 2:{
+                    cout<<"Generando código de retiro."<<endl;
+                    cout<<codigo<<endl;
+                    retirosLista.push_back("Retiro por código de cajero con el código: " + std::to_string(codigo));
+                    break;
+                }
+                default:{
+                    cout<<"Opción no válida."<<endl;
+                    break;
+                }
+            }
+        }
+
+        void movimientos(){
+            int eleccion3;
+            cout<<"Movimientos de Nequi:"<<endl;
+            cout<<"¿Como quiere ver sus movimientos?\n(1) Para últimos 10.\n(2) Solo recarga.\n(3) Solo Meta.\n(4) Solo Bolsillos.\n(5) Solo retiros.\n(6) Todos sus movimientos."<<endl;
+                cin>>eleccion3;
+            switch(eleccion3){
+                case 1:{
+                    cout<<"Últimos 10 movimientos:"<<endl;
+                    for (int i = 0; i < 10; i++) {
+                        cout<<movimientosLista.back()<<endl;
+                        movimientosLista.pop_back();
+                    }
+                    break;
+                }
+                case 2:{
+                    cout<<"Recargas:"<<endl;
+                    for (int i = 0; i < recargasLista.size(); i++) {
+                        cout<<recargasLista.back()<<endl;
+                        recargasLista.pop_back();
+                    }
+                    break;
+                }
+                case 3:{
+                    cout<<"Metas:"<<endl;
+                    for (int i = 0; i < metasLista.size(); i++) {
+                        cout<<metasLista.back()<<endl;
+                        metasLista.pop_back();
+                    }
+                    break;
+                }
+                case 4:{
+                    cout<<"Bolsillos:"<<endl;
+                    for (int i = 0; i < bolsillosLista.size(); i++) {
+                        cout<<bolsillosLista.back()<<endl;
+                        bolsillosLista.pop_back();
+                    }
+                    break;
+                }
+                case 5:{
+                    cout<<"Retiros:"<<endl;
+                    for (int i = 0; i < retirosLista.size(); i++) {
+                        cout<<retirosLista.back()<<endl;
+                        retirosLista.pop_back();
+                    }
+                    break;
+                }
+                case 6:{
+                    cout<<"Todos los movimientos:"<<endl;
+                    for (int i = 0; i < movimientosLista.size(); i++) {
+                        cout<<movimientosLista.back()<<endl;
+                        movimientosLista.pop_back();
+                    }
+                    break;
+                }
+                default:{
+                    cout<<"Opción no válida."<<endl;
+                    break;
+                }
+            }
         }
 
     
@@ -385,6 +489,40 @@ int main(){
     nequi.acceso();
 
     while(accesoConcedido==true){
+        int eleccion2;
+        cout<<"¿Qué desea hacer?\n(1) Recargar.\n(2) Crear meta.\n(3) Bolsillos.\n(4) Sacar plata.\n(5) Ver movimientos.\n(6) Salir."<<endl;
+            cin>>eleccion2;
+        switch(eleccion2){
+            case 1:{
+                nequi.Recarga();
+                break;
+            }
+            case 2:{
+                nequi.crearMeta();
+                break;
+            }
+            case 3:{
+                nequi.bolsillos();
+                break;
+            }
+            case 4:{
+                nequi.sacarPlata();
+                break;
+            }
+            case 5:{
+                nequi.movimientos();
+                break;
+            }
+            case 6:{
+                cout<<"Gracias por usar Nequi."<<endl;
+                accesoConcedido = false;
+                break;
+            }
+            default:{
+                cout<<"Opción no válida."<<endl;
+                break;
+            }
+        }
         
     }
     return 0;
