@@ -50,6 +50,10 @@ class Node {
         next = node;
     }
 
+    void setSong(Song song) {
+        this->song = song;
+    }
+
     Node* getNext(){
         return next;
     }
@@ -175,6 +179,62 @@ public:
         current = current->getNext();
         }
     }
+
+    void ordenarJamDuracion1a3() {
+        Node* current = jam;
+        while (current != nullptr) {
+            Node* index = current->getNext();
+            while (index != nullptr) {
+                if (current->getSong().duracion >= 1 && current->getSong().duracion <= 3 && index->getSong().duracion >= 1 && index->getSong().duracion <= 3) {
+                    if (current->getSong().duracion > index->getSong().duracion) {
+                        Song temp = current->getSong();
+                        current->setSong(index->getSong());
+                        index->setSong(temp);
+                    }
+                }
+            index = index->getNext();
+            }
+        current = current->getNext();
+        }
+    }
+
+    void mostrarCancionesConA() {
+        Node* current = jam;
+        while (current != nullptr) {
+            if (current->getSong().nombre[0] == 'a' || current->getSong().nombre[0] == 'A'){
+                cout<<current->getSong().nombre<<endl;
+            }
+        current = current->getNext();
+        }
+    }
+
+    void mostrarCancionesArtista(string artista) {
+        Node* current = jam;
+        while (current != nullptr) {
+            if (current->getSong().artista == artista) {
+                cout << current->getSong().nombre << std::endl;
+            }
+        current = current->getNext();
+        }
+    }
+
+    void ordenarJamMasDe3Minutos() {
+        Node* current = jam;
+        while (current != nullptr) {
+            Node* index = current->getNext();
+            while (index != nullptr) {
+                if (current->getSong().duracion > 3 && index->getSong().duracion > 3) {
+                    if (current->getSong().duracion > index->getSong().duracion) {
+                        Song temp = current->getSong();
+                        current->setSong(index->getSong());
+                        index->setSong(temp);
+                    }
+                }
+            index = index->getNext();
+            }
+        current = current->getNext();
+        }
+    }
 };
 
 int main() {
@@ -262,18 +322,48 @@ int main() {
                     case 1:{
                         spotifyJam.ordenarJamAZ();
                         cout<<"Se ha ordenado el Jam de Spotify por nombre (A-Z)."<<endl;
+                        spotifyJam.displayJam();
                         break;
                     }
                     case 2:{
                         spotifyJam.ordenarJamArtistaZA();
                         cout<<"Se ha ordenado el Jam de Spotify por artista (Z-A)."<<endl;
+                        spotifyJam.displayJam();
                         break;
+                    }
+                    case 3:{
+                        spotifyJam.ordenarJamDuracion1a3();
+                        cout<<"Se ha ordenado el Jam de Spotify por duración (1-3 minutos)."<<endl;
+                        spotifyJam.displayJam();
+                        break;
+                    }
+                    case 4:{
+                        cout<<"Canciones que empiezan con la letra 'a':"<<endl;
+                        spotifyJam.mostrarCancionesConA();
+                        break;
+                    }
+                    case 5:{
+                        string artista;
+
+                        cout<<"Canciones que pertenecen a un mismo artista."<<endl;
+                        cout<<"Ingresa el nombre del artista: ";
+                        cin>>artista;
+                        spotifyJam.mostrarCancionesArtista(artista);
+                        break;
+                    }
+                    case 6:{
+                        spotifyJam.ordenarJamMasDe3Minutos();
+                        cout<<"Se ha ordenado el Jam de Spotify por duración (más de 3 minutos)."<<endl;
+                        spotifyJam.displayJam();
+                        break;
+
                     }
                     default:{
                         cout<<"Opción no válida."<<endl;
                         break;
                     }
                 }
+                break;
             default:
                 cout<<"Opción no válida."<<endl;
                 break;
@@ -281,5 +371,3 @@ int main() {
     }
     return 0;
 }
-//ordenar las los elementos de las listas por nombre (A-Z), por artista (Z-A) y por duración (1-3 minutos), buscar canciones por a, 
-//enlistar canciones que pertenecen a un mismo artista, y todas las canciones que duren mas de 3 minutos.
