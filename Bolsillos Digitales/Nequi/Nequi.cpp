@@ -13,7 +13,8 @@ class Usuario{
     private:
         string numTelefono;
         string contrasena;
-        double saldo;
+        double saldo, colchon;
+        int diaColchon, mesColchon, anoColchon;
 
     public:
         // Constructor que inicializa los atributos en vacío
@@ -40,19 +41,36 @@ class Usuario{
         double getSaldo(){
             return saldo;
         }
-
-        void setSaldo(double sal){
-            saldo = sal;
-        }
-
+        
         // Método que agrega un monto al saldo
         void agregarSaldo(double monto) {
-            setSaldo() += monto;
+            saldo += monto;
+        }
+
+        void establecerColchon(double cantidad, int dia, int mes, int ano) {
+            if (cantidad < saldo) {
+                colchon = cantidad;
+                saldo -= cantidad;
+                diaColchon = dia;
+                mesColchon = mes;
+                anoColchon = ano;
+            } else {
+                cout<<"La cantidad ingresada es mayor al saldo disponible."<<endl;
+            }
+        }
+
+        void moverDineroColchonASaldo(int dia, int mes, int ano){
+            if (dia == diaColchon && mes == mesColchon && ano == anoColchon) {
+                saldo += colchon;
+                colchon = 0;
+            }else{
+                cout<<"No se puede mover el dinero del colchón al saldo hasta la fecha especificada."<<endl;
+            }
         }
 
 
 };
-
+/*
 class Nequi{
     public:
         //Lista de usuarios
@@ -178,7 +196,7 @@ class Nequi{
 
                     for(int i = 0; i < 12; i++) {
                         uniform_int_distribution<> distrib(0, caracteres.size() - 1);
-                    codigo += caracteres[distrib(generator)];
+                        codigo += caracteres[distrib(generator)];
                     }
 
                     // Generar un saldo aleatorio entre 10000 y 50000
@@ -188,7 +206,7 @@ class Nequi{
                     // Agregar el saldo aleatorio al saldo del usuario
                     u.agregarSaldo(saldoAleatorio);
 
-                    cout << "Se ha generado el código " << codigo << " con un saldo de " << saldoAleatorio << endl;
+                    cout<<"Se ha generado el código "<< codigo<<" con un saldo de "<<saldoAleatorio<<endl;
                     break;
                     }
                 default:{
@@ -197,6 +215,8 @@ class Nequi{
                 }
             }
         }
+
+    
 };
 
 int main(){
@@ -210,3 +230,4 @@ int main(){
     }
     return 0;
 }
+*/
