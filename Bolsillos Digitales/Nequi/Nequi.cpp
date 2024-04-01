@@ -47,6 +47,15 @@ class Usuario{
             saldo += monto;
         }
 
+        // Método que retira un monto del saldo
+        void retirarSaldo(double monto) {
+            if (monto <= saldo) {
+                saldo -= monto;
+            } else {
+                cout<<"La cantidad ingresada es mayor al saldo disponible."<<endl;
+            }
+        }
+
         void establecerColchon(double cantidad, int dia, int mes, int ano) {
             if (cantidad < saldo) {
                 colchon = cantidad;
@@ -62,15 +71,73 @@ class Usuario{
         void moverDineroColchonASaldo(int dia, int mes, int ano){
             if (dia == diaColchon && mes == mesColchon && ano == anoColchon) {
                 saldo += colchon;
-                colchon = 0;
+                colchon = 0.0;
             }else{
                 cout<<"No se puede mover el dinero del colchón al saldo hasta la fecha especificada."<<endl;
             }
         }
-
-
 };
-/*
+
+class Meta {
+    private:
+        string nombre;
+        int dia;
+        int mes;
+        int ano;
+        bool descuentoDisponible;
+        int frecuenciaDescuento;
+        int diaDescuento;
+
+    public:
+        Meta(string nombreMeta, int diaMeta, int mesMeta, int anoMeta) {
+            nombre = nombreMeta;
+            dia = diaMeta;
+            mes = mesMeta;
+            ano = anoMeta;
+            descuentoDisponible = false;
+            frecuenciaDescuento = 0;
+            diaDescuento = 0;
+        }
+
+        string getNombre() {
+            return nombre;
+        }
+
+        void setNombre(string nombreMeta) {
+            nombre = nombreMeta;
+        }
+
+        void getFecha(int &diaMeta, int &mesMeta, int &anoMeta) {
+            diaMeta = dia;
+            mesMeta = mes;
+            anoMeta = ano;
+        }
+
+        void setFecha(int diaMeta, int mesMeta, int anoMeta) {
+            dia = diaMeta;
+            mes = mesMeta;
+            ano = anoMeta;
+        }
+
+        void establecerDescuento(bool descuento, int frecuencia, int diaDesc) {
+            descuentoDisponible = descuento;
+            frecuenciaDescuento = frecuencia;
+            diaDescuento = diaDesc;
+        }
+
+        bool getDescuentoDisponible() {
+            return descuentoDisponible;
+        }
+
+        int getFrecuenciaDescuento() {
+            return frecuenciaDescuento;
+        }
+
+        int getDiaDescuento() {
+            return diaDescuento;
+        }
+};
+
 class Nequi{
     public:
         //Lista de usuarios
@@ -216,6 +283,98 @@ class Nequi{
             }
         }
 
+        void crearMeta() {
+            string nombreMeta;
+            int diaMeta, mesMeta, anoMeta;
+            bool descuentoDisponible;
+            int frecuenciaDescuento, diaDescuento;
+
+            // Pedir al usuario la información de la meta
+            cout<<"Ingrese el nombre de la meta: ";
+                cin>>nombreMeta;
+            cout<<"Ingrese la fecha objetivo (dia, mes, año): ";
+                cin>>diaMeta>>mesMeta>>anoMeta;
+            cout<<"¿Desea que se descuente del saldo disponible? (1 para sí, 0 para no): ";
+                cin>>descuentoDisponible;
+
+            if(descuentoDisponible){
+                cout<<"Ingrese la frecuencia de descuento (1) Para diario.\n(2) Para semanal.\n(3) Para cada quince días. (4) Para cada mes. "<<endl;
+                    cin>>frecuenciaDescuento;
+                if(frecuenciaDescuento == 2 || frecuenciaDescuento == 3 || frecuenciaDescuento == 4) {
+                    cout<<"Ingrese el día de descuento: ";
+                        cin>>diaDescuento;
+                }
+            }
+
+            // Crear la meta
+            Meta meta(nombreMeta, diaMeta, mesMeta, anoMeta);
+
+            // Si se debe descontar del saldo disponible
+            if (descuentoDisponible) {
+                // Establecer el descuento
+                meta.establecerDescuento(descuentoDisponible, frecuenciaDescuento, diaDescuento);
+
+                // Determinar la frecuencia de descuento
+                switch (frecuenciaDescuento) {
+                    case 1:
+                        cout << "Se descontará del saldo diariamente." << endl;
+                        break;
+                    case 2:
+                        cout << "Se descontará del saldo semanalmente el día " << diaDescuento << " de la semana." << endl;
+                        break;
+                    case 3:
+                        cout << "Se descontará del saldo cada quince días los días " << diaDescuento << " y " << (diaDescuento + 15) % 31 << " del mes." << endl;
+                        break;
+                    case 4: 
+                        cout << "Se descontará del saldo mensualmente el día " << diaDescuento << " del mes." << endl;
+                        break;
+                    default:
+                        cout << "Frecuencia de descuento no válida." << endl;
+                        break;
+                }
+            }
+        }
+
+        void bolsillos(){
+            int eleccion;
+            Usuario u;
+            string nombreBolsillo;
+            double monto, bolsilloSaldo = 0.0;
+            
+            cout<<"Bolsillos:"<<endl;
+            cout<<"(1) Crear un bolsillo digital.\n(2) Retirar del bolsillo."<<endl;
+            cin>>eleccion;
+            switch (eleccion){
+                case 1:{
+                    cout<<"Nombre del bolsillo: "<<endl;
+                        cin>>nombreBolsillo;
+                    cout<<"Cuanto vas a dejar en el bolsillo: "<<endl;
+                        cin>>monto;
+                        u.retirarSaldo(monto);
+                        bolsilloSaldo += monto;
+                    break;
+                }
+                case 2:{
+                    cout<<"Nombre del bolsillo: "<<endl;
+                        cin>>nombreBolsillo;
+                    cout<<"Cuanto vas a retirar del bolsillo: "<<endl;
+                        cin>>monto;
+                        if (monto <= bolsilloSaldo) {
+                            u.agregarSaldo(monto);
+                            bolsilloSaldo -= monto;
+                        } else {
+                            cout<<"La cantidad ingresada es mayor al saldo disponible en el bolsillo."<<endl;
+                        }
+                    break;
+                }
+                default:{
+                    cout<<"Opción no válida."<<endl;
+                    break;
+                }
+            }
+
+        }
+
     
 };
 
@@ -230,4 +389,3 @@ int main(){
     }
     return 0;
 }
-*/
