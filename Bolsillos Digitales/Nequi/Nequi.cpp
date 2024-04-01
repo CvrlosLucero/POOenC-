@@ -212,6 +212,7 @@ class Nequi{
             switch (eleccion){
                 case 1:{
                     cout<<"Ve a un Punto Nequi o Corresponsal Bancolombia."<<endl;
+                    break;
                 }
                 case 2:{
                     cout<<"Recarga por PSE."<<endl;
@@ -264,7 +265,7 @@ class Nequi{
                             break;
                         }
                     }
-
+                    break;
                 }
                 case 3:{
                     // Generar un código aleatorio de 12 caracteres
@@ -479,18 +480,27 @@ class Nequi{
             }
         }
 
+        void crearColchon(double cantidad, int dia, int mes, int ano) {
+            Usuario u;
+            u.establecerColchon(cantidad, dia, mes, ano);
+        }
+
+        void moverDineroColchonASaldo(int dia, int mes, int ano) {
+            Usuario u;
+            u.moverDineroColchonASaldo(dia, mes, ano);
+        }
+
     
 };
 
 int main(){
-    bool accesoConcedido = false;
     Nequi nequi;
-
+    bool accesoConcedido = nequi.acceso();
     nequi.acceso();
 
-    while(accesoConcedido==true){
+    while(accesoConcedido){
         int eleccion2;
-        cout<<"¿Qué desea hacer?\n(1) Recargar.\n(2) Crear meta.\n(3) Bolsillos.\n(4) Sacar plata.\n(5) Ver movimientos.\n(6) Salir."<<endl;
+        cout<<"¿Qué desea hacer?\n(1) Recargar.\n(2) Crear meta.\n(3) Bolsillos.\n(4) Sacar plata.\n(5) Ver movimientos.\n(6) Colchon.\n(7) Salir."<<endl;
             cin>>eleccion2;
         switch(eleccion2){
             case 1:{
@@ -513,7 +523,17 @@ int main(){
                 nequi.movimientos();
                 break;
             }
-            case 6:{
+            case 6:
+                double cantidad;
+                int dia, mes, ano;
+                cout<<"Ingrese la cantidad de dinero para el colchón: ";
+                    cin>>cantidad;
+                cout<<"Ingrese la fecha en la que podrá mover el dinero del colchón al saldo (dia, mes, año): ";
+                    cin>>dia>>mes>>ano;
+                nequi.crearColchon(cantidad, dia, mes, ano);
+                break;
+
+            case 7:{
                 cout<<"Gracias por usar Nequi."<<endl;
                 accesoConcedido = false;
                 break;
